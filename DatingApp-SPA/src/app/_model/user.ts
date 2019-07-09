@@ -1,3 +1,5 @@
+import { Photo } from './photo';
+
 export interface User {
   id: number;
   userName: string;
@@ -13,4 +15,5 @@ export interface User {
   introduction?: string;
   lookingFor?: string;
   roles?: string[];
+  photos?: Photo[];
 }

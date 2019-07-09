@@ -68,23 +68,24 @@ namespace DatingApp.API
             }
             else
             {
+                app.UseDeveloperExceptionPage();
                 //this allows us to rewrite how exceptions are handled using asp.net middleware
                 //we set the response of any request to a 500 and store the error in a variable
                 //the variable is then used to write the error message into the response as well
-                app.UseExceptionHandler(builder =>
-                {
-                    builder.Run(async context =>
-                    {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;//sets the response status code
+                // app.UseExceptionHandler(builder =>
+                // {
+                //     builder.Run(async context =>
+                //     {
+                //         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;//sets the response status code
 
-                        var error = context.Features.Get<IExceptionHandlerFeature>();//gets errors from the request
-                        if (error != null)
-                        {
-                            context.Response.AddApplicationError(error.Error.Message);//see helpers for implementation
-                            await context.Response.WriteAsync(error.Error.Message);//writes the error message into the response
-                        }
-                    });
-                });
+                //         var error = context.Features.Get<IExceptionHandlerFeature>();//gets errors from the request
+                //         if (error != null)
+                //         {
+                //             context.Response.AddApplicationError(error.Error.Message);//see helpers for implementation
+                //             await context.Response.WriteAsync(error.Error.Message);//writes the error message into the response
+                //         }
+                //     });
+                // });
             }
 
             seeder.SeedUsers();
